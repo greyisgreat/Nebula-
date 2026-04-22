@@ -1,20 +1,23 @@
 import express from "express";
-import scramjet from "@mercuryworkshop/scramjet";
-
-const { createServer } = scramjet;
+import { ScramjetServer } from "@mercuryworkshop/scramjet";
 
 const app = express();
 
-// Scramjet proxy
-app.use(createServer({
+// create scramjet instance
+const scramjet = new ScramjetServer({
   prefix: "/service/"
-}));
+});
 
-// serve your OS
+// middleware
+app.use((req, res, next) => {
+  scramjet.handleRequest(req, res, next);
+});
+
+// serve your frontend
 app.use(express.static("./"));
 
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log("NebulOS running on port " + PORT);
+  console.log("Running on port " + PORT);
 });
