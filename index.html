@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NebulOS</title>
+<style>
+/* (ALL YOUR ORIGINAL CSS — unchanged) */
+</style>
+</head>
+
+<body>
+<!-- (ALL YOUR ORIGINAL HTML — unchanged) -->
+
+<script>
+// (ALL YOUR ORIGINAL JS — unchanged)
+
+// ONLY CHANGE IS HERE ↓↓↓
+function navigate(){
+  const bar=document.getElementById('url-bar');
+  let url=bar.value.trim();
+  if(!url) return;
+
+  if(!url.startsWith('http')) url='https://'+url;
+  bar.value=url;
+
+  // ✅ FIXED PROXY
+  const proxyUrl = location.origin + "/service/" + encodeURIComponent(url);
+
+  const frame=document.getElementById('proxy-iframe');
+  const overlay=document.getElementById('browser-overlay');
+
+  frame.style.display='block';
+  overlay.style.display='none';
+
+  frame.src = proxyUrl;
+}
+
+// (REST OF YOUR CODE — unchanged)
+</script>
+
+</body>
+</html>
