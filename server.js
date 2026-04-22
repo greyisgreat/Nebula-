@@ -1,5 +1,7 @@
 import express from "express";
-import { createServer } from "@mercuryworkshop/scramjet";
+import scramjet from "@mercuryworkshop/scramjet";
+
+const { createServer } = scramjet;
 
 const app = express();
 
